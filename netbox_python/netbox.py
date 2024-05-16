@@ -23,7 +23,7 @@ JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
 
 
 class NetBoxClient(RestClient):
-    def __init__(self, base_url: str, token: str, headers: Dict[str, str] = None):
+    def __init__(self, base_url: str, token: str, headers: Dict[str, str] = None, verify: bool = True):
         self.status = self._status(self)
         self.token = token
 
@@ -45,7 +45,7 @@ class NetBoxClient(RestClient):
         self.vpn = vpn(self)
         self.wireless = wireless(self)
 
-        super().__init__(base_url=url, headers=headers)
+        super().__init__(base_url=url, headers=headers, verify=verify)
 
     def __enter__(self):
         return self
